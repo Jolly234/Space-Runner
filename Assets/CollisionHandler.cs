@@ -1,7 +1,9 @@
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
-{
+{   
+     
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag) // switch can be used instead of if/else (conditional)
@@ -16,8 +18,16 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("refueled");
                 break;
             default:
-                Debug.Log("U alright?");
+                ReloadLevel();
                 break;
         }
+
+        void ReloadLevel()
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex);
+        }
+
+
     }
 }
