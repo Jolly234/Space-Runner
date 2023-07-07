@@ -551,6 +551,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60.056}
+--- !u!1 &547442550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1148400221227606935, guid: e1463203801bc764d95b45d8a0d7f090, type: 3}
+  m_PrefabInstance: {fileID: 1148400222277606928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &547442555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547442550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a0391213336ea4c971678c05891684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 0, y: 4, z: 0}
+  movementFactor: 0
+  period: 2
 --- !u!1001 &588781055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1142,6 +1162,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1505612284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1179602929166088803, guid: e1463203801bc764d95b45d8a0d7f090, type: 3}
+  m_PrefabInstance: {fileID: 1148400222277606928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1505612289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505612284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a0391213336ea4c971678c05891684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 0, y: -12, z: 0}
+  movementFactor: 0.066
+  period: 2
+--- !u!1 &1512317863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1179602929399745723, guid: e1463203801bc764d95b45d8a0d7f090, type: 3}
+  m_PrefabInstance: {fileID: 1148400222277606928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512317868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512317863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a0391213336ea4c971678c05891684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 0, y: -20, z: 0}
+  movementFactor: 0
+  period: 2
 --- !u!1 &1754317919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1379,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1148400221227606936, guid: e1463203801bc764d95b45d8a0d7f090, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1148400221665175815, guid: e1463203801bc764d95b45d8a0d7f090, type: 3}
       propertyPath: m_Name
       value: Obstacles
