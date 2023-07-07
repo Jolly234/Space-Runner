@@ -15,6 +15,7 @@ public class CollisionHandler : MonoBehaviour
     
 
     bool isTransitioning = false;
+    bool collisionDisabled = false;
     
     void Start()
     {
@@ -22,9 +23,34 @@ public class CollisionHandler : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {      
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        if(Input.GetKeyDown(KeyCode.L)) 
+        {
+            NextLevel();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled; //toggle collision
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {   
-        if (isTransitioning){ return; }
+        if (isTransitioning || collisionDisabled){ return; }
+
+        
         
         switch (other.gameObject.tag) // switch can be used instead of if/else (conditional)
         {
@@ -70,8 +96,8 @@ public class CollisionHandler : MonoBehaviour
                 nextSceneIndex = 0;
             }
 
-            SceneManager.LoadScene(nextSceneIndex);
-        }
+            SceneManager.LoadScene(nextSceneIndex);       
+    }
 
         void ReloadLevel()
         {

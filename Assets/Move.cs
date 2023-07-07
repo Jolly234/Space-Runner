@@ -6,7 +6,10 @@ public class Move : MonoBehaviour
     [SerializeField] float rotationForce;
     [SerializeField] float audioVolume;
     [SerializeField] AudioClip engine;
-    
+    [SerializeField] ParticleSystem enginep;
+    [SerializeField] ParticleSystem sidepleft;
+    [SerializeField] ParticleSystem sidepright;
+
     Rigidbody rb;
     AudioSource audioSource;
    
@@ -30,29 +33,54 @@ public class Move : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * moveForce * Time.deltaTime);
-            if (!audioSource.isPlaying)
-            { audioSource.PlayOneShot(engine, audioVolume); }
+            StartThrust();
         }
         else
         {
-            audioSource.Stop();
+            StopThrust();
         }
 
     }
 
+    private void StopThrust()
+    {
+        enginep.Stop();
+        audioSource.Stop();
+    }
+
+    private void StartThrust()
+    {
+        rb.AddRelativeForce(Vector3.up * moveForce * Time.deltaTime);
+        if (!audioSource.isPlaying)
+        { audioSource.PlayOneShot(engine, audioVolume); }
+        if (!enginep.isPlaying)
+        { enginep.Play(); }
+    }
 
     void ProcessRotation()
     {
 
 
         if (Input.GetKey(KeyCode.A))
-        {
+        {              
             applyRotation(rotationForce);
+            
+            if (!sidepleft.isPlaying)
+            {
+                sidepleft.Play();
+            }                      
         }
+        
         else if (Input.GetKey(KeyCode.D))
+        {            
+            if(!sidepright.isPlaying)
+            { sidepright.Play();}
+            applyRotation(-rotationForce);           
+        }
+
+        else
         {
-            applyRotation(-rotationForce);
+            StopRotation();
         }
 
         void applyRotation (float rotationvalue)
@@ -67,4 +95,9 @@ public class Move : MonoBehaviour
 
     }
 
+    private void StopRotation()
+    {
+        sidepleft.Stop();
+        sidepright.Stop();
+    }
 }
