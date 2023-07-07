@@ -2,24 +2,75 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
-{   
-     
-    void OnCollisionEnter(Collision other)
+{
+    [SerializeField] float delayTimer = 3f;
+    [SerializeField] AudioClip death;
+    [SerializeField] AudioClip success;
+    [SerializeField] float audioVolume;
+
+    [SerializeField] ParticleSystem deathp;
+    [SerializeField] ParticleSystem successp;
+
+    AudioSource audioSource;
+    
+
+    bool isTransitioning = false;
+    
+    void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        
+    }
+
+    void OnCollisionEnter(Collision other)
+    {   
+        if (isTransitioning){ return; }
+        
         switch (other.gameObject.tag) // switch can be used instead of if/else (conditional)
         {
             case "Friendly":
                 Debug.Log("is friendly");
                 break;
             case "Finish":
-                Debug.Log("finish line reached");
-                break;
-            case "Fuel":
-                Debug.Log("refueled");
-                break;
+                StartLoadingSequence();
+                break;          
             default:
-                ReloadLevel();
+                StartCrashSequence();                  
                 break;
+        }
+    }
+
+        void StartCrashSequence()
+        {
+            isTransitioning = true;
+            audioSource.Stop();
+            GetComponent<Move>().enabled = false;
+            Invoke("ReloadLevel", delayTimer);
+            audioSource.PlayOneShot(death, audioVolume);
+            deathp.Play();
+        }
+       
+        void StartLoadingSequence()
+        {   
+            audioSource.Stop();
+            isTransitioning = true;
+            GetComponent<Move>().enabled = false;
+            Invoke("NextLevel", delayTimer);
+            audioSource.PlayOneShot(success, audioVolume);
+            successp.Play();
+         }
+
+        void NextLevel()
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = currentSceneIndex + 1;
+            
+            if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+            {
+                nextSceneIndex = 0;
+            }
+
+            SceneManager.LoadScene(nextSceneIndex);
         }
 
         void ReloadLevel()
@@ -28,6 +79,5 @@ public class CollisionHandler : MonoBehaviour
             SceneManager.LoadScene(currentSceneIndex);
         }
 
-
-    }
+    
 }

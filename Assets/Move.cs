@@ -4,6 +4,9 @@ public class Move : MonoBehaviour
 {
     [SerializeField] float moveForce;
     [SerializeField] float rotationForce;
+    [SerializeField] float audioVolume;
+    [SerializeField] AudioClip engine;
+    
     Rigidbody rb;
     AudioSource audioSource;
    
@@ -12,6 +15,7 @@ public class Move : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        
         
     }
 
@@ -28,7 +32,7 @@ public class Move : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.up * moveForce * Time.deltaTime);
             if (!audioSource.isPlaying)
-            { audioSource.Play(); }
+            { audioSource.PlayOneShot(engine, audioVolume); }
         }
         else
         {
